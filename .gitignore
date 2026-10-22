@@ -1,0 +1,109 @@
+# ---------------------------------------------------------------
+# Dependensi
+# ---------------------------------------------------------------
+/vendor
+/node_modules
+
+# ---------------------------------------------------------------
+# Environment & rahasia
+# ---------------------------------------------------------------
+.env
+.env.*
+!.env.example
+auth.json
+
+# ---------------------------------------------------------------
+# File hot reload Vite & storage link
+# (/public/build SENGAJA tidak di-ignore agar hasil build ikut ke git)
+# ---------------------------------------------------------------
+/public/hot
+/public/storage
+/public/mix-manifest.json
+
+# ---------------------------------------------------------------
+# Cache & file generate Laravel
+# ---------------------------------------------------------------
+/storage/*.key
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/testing/*
+/storage/app/*
+!/storage/logs/.gitignore
+!/storage/framework/cache/.gitignore
+!/storage/framework/sessions/.gitignore
+!/storage/framework/views/.gitignore
+!/storage/framework/testing/.gitignore
+!/storage/app/.gitignore
+/bootstrap/cache/*.php
+.phpunit.result.cache
+/.phpunit.cache
+.phpactor.json
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# ---------------------------------------------------------------
+# Thumbnail galeri (dibuat otomatis oleh GalleryService)
+# ---------------------------------------------------------------
+/public/images/gallery/thumbs
+
+# ---------------------------------------------------------------
+# Arsip, backup, dan dump database
+# ---------------------------------------------------------------
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.tgz
+*.bak
+*.backup
+*.old
+*.orig
+*.sql
+*.sqlite
+*.sqlite3
+
+# ---------------------------------------------------------------
+# Docker (data volume lokal)
+# ---------------------------------------------------------------
+/docker-data
+/mysql-data
+docker-compose.override.yml
+
+# ---------------------------------------------------------------
+# File sistem & sampah OS
+# ---------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ---------------------------------------------------------------
+# Editor & IDE
+# ---------------------------------------------------------------
+/.idea
+/.vscode
+/.fleet
+/.nova
+/.vs
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ---------------------------------------------------------------
+# Log & file sementara
+# ---------------------------------------------------------------
+*.log
+*.tmp
+*.temp
+/tmp
