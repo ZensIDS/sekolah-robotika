@@ -44,7 +44,7 @@
     <span class="orn bg-dots hidden h-24 w-24 md:block" style="right:3%;bottom:6rem"></span>
 
     <div class="wrap relative grid items-center gap-10 pb-28 pt-10 md:grid-cols-2">
-        <div class="reveal">
+        <div>
             <span class="inline-block rounded-full bg-white/10 px-4 py-1 text-sm font-semibold text-brand-sun">🤖 Robotika • Coding • AI</span>
             <h1 class="mt-5 text-4xl font-extrabold leading-tight md:text-6xl">
                 Belajar <span class="relative inline-block text-brand-sun">Teknologi<svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M2 8c20-8 40 8 60 0s40 8 60 0 40 8 76 0" stroke="#1ba8f0" stroke-width="4" stroke-linecap="round"/></svg></span> Masa Depan, Mulai Hari Ini
@@ -57,7 +57,7 @@
                 <a href="#tentang" class="btn-ghost">Kenali Program</a>
             </div>
         </div>
-        <div class="reveal relative flex justify-center">
+        <div class="relative flex justify-center">
             {{-- Logo hero: placeholder blur + fade-in, memakai versi ringan --}}
             <div class="logo-wrap relative w-full max-w-lg animate-float drop-shadow-[0_20px_40px_rgba(27,168,240,.45)]">
                 @if ($logo['blur'])
@@ -84,7 +84,7 @@
 <section class="relative z-10 -mt-2 pb-6">
     <div class="wrap grid gap-5 md:grid-cols-3">
         @foreach ($stats as $s)
-            <div class="card group reveal flex items-center gap-5">
+            <div class="card group flex items-center gap-5">
                 <div class="grid h-16 w-16 place-items-center rounded-2xl bg-brand-sun/20 text-3xl transition duration-300 group-hover:-rotate-12 group-hover:scale-110">{{ $s['icon'] }}</div>
                 <div>
                     <div class="text-4xl font-extrabold text-brand-navy"><span data-count="{{ $s['value'] }}">0</span>+</div>
@@ -225,7 +225,7 @@
                                      @if ($f['blur']) style="background-image:url('{{ $f['blur'] }}')" @endif>
                                     <img src="{{ asset($f['src']) }}" alt="Dokumentasi Sekolah Robotika"
                                          width="640" height="448" decoding="async"
-                                         loading="{{ $loop->index < 8 ? 'eager' : 'lazy' }}"
+                                         loading="lazy" fetchpriority="low"
                                          onload="this.classList.add('loaded');this.parentElement.classList.add('loaded')"
                                          onerror="this.parentElement.classList.add('loaded')">
                                 </div>
