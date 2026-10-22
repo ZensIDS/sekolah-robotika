@@ -52,3 +52,16 @@
 @keyframes marquee-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+/* ===== Ornamen dekoratif ===== */
+.orn { position: absolute; pointer-events: none; user-select: none; }
+.bg-dots { background-image: radial-gradient(rgba(255,255,255,.4) 1.5px, transparent 1.5px); background-size: 16px 16px; }
+.bg-dots-navy { background-image: radial-gradient(rgba(0,44,134,.28) 1.5px, transparent 1.5px); background-size: 16px 16px; }
+.spin-slow { animation: spin-slow 28s linear infinite; }
+.spin-rev { animation: spin-slow 20s linear infinite reverse; }
+.bob { animation: bob 5s ease-in-out infinite; }
+.twinkle { animation: twinkle 3s ease-in-out infinite; }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes twinkle { 0%, 100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.25); } }
+@media (prefers-reduced-motion: reduce) { .spin-slow, .spin-rev, .bob, .twinkle { animation: none; } }
