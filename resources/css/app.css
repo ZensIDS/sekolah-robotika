@@ -65,3 +65,9 @@
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 @keyframes twinkle { 0%, 100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.25); } }
 @media (prefers-reduced-motion: reduce) { .spin-slow, .spin-rev, .bob, .twinkle { animation: none; } }
+
+/* ===== Skeleton / fade-in logo ===== */
+.img-fade { opacity: 0; transition: opacity .5s ease; }
+.img-fade.loaded { opacity: 1; }
+.logo-wrap .logo-ph { transition: opacity .5s ease; }
+.logo-wrap.loaded .logo-ph { opacity: 0; animation: none; }

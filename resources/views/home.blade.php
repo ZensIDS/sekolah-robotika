@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
+@php($logo = app(\App\Services\LogoService::class)->logo())
+
 @section('content')
 
 {{-- NAVBAR --}}
 <header class="fixed inset-x-0 top-0 z-50 bg-brand-deep/80 backdrop-blur-md">
     <div class="wrap flex items-center justify-between py-3">
         <a href="#beranda" class="flex items-center gap-2">
-            <img src="{{ asset('images/logo.png') }}" alt="Sekolah Robotika" class="h-10 w-auto">
+            <img src="{{ $logo['sm']['url'] }}" width="{{ $logo['sm']['w'] }}" height="{{ $logo['sm']['h'] }}" alt="Sekolah Robotika" class="h-10 w-auto">
         </a>
         <nav class="hidden items-center gap-7 text-sm font-medium text-white/90 md:flex">
             <a href="#tentang" class="hover:text-brand-sun">Tentang</a>
@@ -56,7 +58,19 @@
             </div>
         </div>
         <div class="reveal relative flex justify-center">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo Sekolah Robotika" class="w-full max-w-lg animate-float drop-shadow-[0_20px_40px_rgba(27,168,240,.45)]">
+            {{-- Logo hero: placeholder blur + fade-in, memakai versi ringan --}}
+            <div class="logo-wrap relative w-full max-w-lg animate-float drop-shadow-[0_20px_40px_rgba(27,168,240,.45)]">
+                @if ($logo['blur'])
+                    <img src="{{ $logo['blur'] }}" alt="" aria-hidden="true" class="logo-ph absolute inset-0 h-full w-full animate-pulse object-contain blur-xl">
+                @endif
+                <img src="{{ $logo['md']['url'] }}"
+                     @if ($logo['srcset']) srcset="{{ $logo['srcset'] }}" sizes="(min-width: 768px) 512px, 90vw" @endif
+                     width="{{ $logo['md']['w'] }}" height="{{ $logo['md']['h'] }}"
+                     alt="Logo Sekolah Robotika" fetchpriority="high" decoding="async"
+                     class="img-fade relative block h-auto w-full"
+                     onload="this.classList.add('loaded');this.parentElement.classList.add('loaded')"
+                     onerror="this.classList.add('loaded');this.parentElement.classList.add('loaded')">
+            </div>
             <span class="orn bob left-0 top-6 hidden rounded-2xl bg-white px-3 py-2 text-sm font-bold text-brand-navy shadow-xl sm:block" style="animation-delay:.3s">💡 Coding</span>
             <span class="orn bob right-0 top-1/3 hidden rounded-2xl bg-brand-sun px-3 py-2 text-sm font-bold text-brand-deep shadow-xl sm:block" style="animation-delay:1.2s">🧠 AI</span>
             <span class="orn bob bottom-6 left-8 hidden rounded-2xl bg-brand-sky px-3 py-2 text-sm font-bold text-white shadow-xl sm:block" style="animation-delay:2s">🤖 Robotika</span>
@@ -257,7 +271,7 @@
     <div class="wrap relative grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         {{-- Brand --}}
         <div class="sm:col-span-2 lg:col-span-1">
-            <img src="{{ asset('images/logo.png') }}" alt="Sekolah Robotika" class="h-14 w-auto">
+            <img src="{{ $logo['sm']['url'] }}" width="{{ $logo['sm']['w'] }}" height="{{ $logo['sm']['h'] }}" alt="Sekolah Robotika" class="h-14 w-auto" loading="lazy">
             <p class="mt-4 text-sm leading-relaxed">
                 Program Robotika, Coding, Dan AI Berjenjang Dari SD Hingga Perguruan Tinggi. Praktik Langsung, Berbasis Proyek.
             </p>
