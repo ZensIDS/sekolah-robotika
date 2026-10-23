@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
-@php($logo = app(\App\Services\LogoService::class)->logo())
+@php
+    $logo = app(\App\Services\LogoService::class)->logo();
+
+    // Foto pemanis hero: taruh di public/images/hero/1.jpg, 2.jpg, 3.jpg.
+    // Jika belum ada, sementara dipakai foto galeri nomor 1-3.
+    $galeri = app(\App\Services\GalleryService::class);
+    $heroFoto = collect([1, 2, 3])->map(fn ($n) => $galeri->foto($n, 'hero') ?? $galeri->foto($n));
+@endphp
 
 @section('content')
 
@@ -57,7 +64,27 @@
                 <a href="#tentang" class="btn-ghost">Kenali Program</a>
             </div>
         </div>
-        <div class="relative flex justify-center">
+        <div class="relative flex min-h-[20rem] items-center justify-center md:min-h-[28rem]">
+            {{-- Foto pemanis abstrak (di belakang logo) --}}
+            <div class="orn bob left-0 top-2 w-24 sm:w-32 md:left-2 md:w-40" style="animation-delay:.2s">
+                <div class="relative -rotate-6">
+                    <div class="absolute inset-0 translate-x-2 translate-y-2 rounded-3xl bg-brand-sun"></div>
+                    <x-hero-photo :foto="$heroFoto[0]" class="aspect-[4/5] rounded-3xl border-4 border-white" />
+                </div>
+            </div>
+            <div class="orn bob right-0 top-8 w-20 sm:w-28 md:right-2 md:w-32" style="animation-delay:1s">
+                <div class="relative">
+                    <div class="spin-slow absolute -inset-2 rounded-full border-2 border-dashed border-brand-sun/70"></div>
+                    <x-hero-photo :foto="$heroFoto[1]" class="aspect-square rounded-full border-4 border-brand-sun" />
+                </div>
+            </div>
+            <div class="orn bob bottom-0 right-[10%] w-24 sm:w-28 md:w-36" style="animation-delay:1.8s">
+                <div class="relative">
+                    <div class="absolute inset-0 -translate-x-2 translate-y-2 rounded-b-2xl rounded-t-full bg-brand-sky"></div>
+                    <x-hero-photo :foto="$heroFoto[2]" class="aspect-[3/4] rounded-b-2xl rounded-t-full border-4 border-white" />
+                </div>
+            </div>
+
             {{-- Logo hero: placeholder blur + fade-in, memakai versi ringan --}}
             <div class="logo-wrap relative w-full max-w-lg animate-float drop-shadow-[0_20px_40px_rgba(27,168,240,.45)]">
                 @if ($logo['blur'])
@@ -71,9 +98,9 @@
                      onload="this.classList.add('loaded');this.parentElement.classList.add('loaded')"
                      onerror="this.classList.add('loaded');this.parentElement.classList.add('loaded')">
             </div>
-            <span class="orn bob left-0 top-6 hidden rounded-2xl bg-white px-3 py-2 text-sm font-bold text-brand-navy shadow-xl sm:block" style="animation-delay:.3s">💡 Coding</span>
-            <span class="orn bob right-0 top-1/3 hidden rounded-2xl bg-brand-sun px-3 py-2 text-sm font-bold text-brand-deep shadow-xl sm:block" style="animation-delay:1.2s">🧠 AI</span>
-            <span class="orn bob bottom-6 left-8 hidden rounded-2xl bg-brand-sky px-3 py-2 text-sm font-bold text-white shadow-xl sm:block" style="animation-delay:2s">🤖 Robotika</span>
+            <span class="orn bob bottom-10 left-0 hidden rounded-2xl bg-white px-3 py-2 text-sm font-bold text-brand-navy shadow-xl sm:block" style="animation-delay:.3s">💡 Coding</span>
+            <span class="orn bob left-[42%] top-1 hidden rounded-2xl bg-brand-sun px-3 py-2 text-sm font-bold text-brand-deep shadow-xl sm:block" style="animation-delay:1.2s">🧠 AI</span>
+            <span class="orn bob bottom-2 left-[34%] hidden rounded-2xl bg-brand-sky px-3 py-2 text-sm font-bold text-white shadow-xl sm:block" style="animation-delay:2s">🤖 Robotika</span>
         </div>
     </div>
 

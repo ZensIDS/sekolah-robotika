@@ -10,19 +10,19 @@ class GalleryService
     private const VERSION = 'v2';          // ganti nilai ini jika ingin memaksa thumbnail dibuat ulang
 
     /**
-     * Ambil foto public/images/gallery/{n}.jpg.
-     * Thumbnail dibuat otomatis sekali saja (di public/images/gallery/thumbs),
+     * Ambil foto public/images/{folder}/{n}.jpg (folder default: gallery, hero: foto pemanis hero).
+     * Thumbnail dibuat otomatis sekali saja (di public/images/{folder}/thumbs),
      * lalu dipakai terus sampai file aslinya diganti.
      * Return null jika foto tidak ada.
      */
-    public function foto(int $n): ?array
+    public function foto(int $n, string $folder = 'gallery'): ?array
     {
-        $src = public_path("images/gallery/{$n}.jpg");
+        $src = public_path("images/{$folder}/{$n}.jpg");
         if (!is_file($src)) {
             return null;
         }
 
-        $dir = public_path('images/gallery/thumbs');
+        $dir = public_path("images/{$folder}/thumbs");
         if (!is_dir($dir)) {
             @mkdir($dir, 0775, true);
         }
@@ -51,8 +51,8 @@ class GalleryService
 
         // Thumbnail gagal dibuat: pakai foto asli agar tetap tampil
         $url = is_file($thumb)
-            ? "images/gallery/thumbs/{$n}-{$v}.{$ext}?v={$mtime}"
-            : "images/gallery/{$n}.jpg?v={$mtime}";
+            ? "images/{$folder}/thumbs/{$n}-{$v}.{$ext}?v={$mtime}"
+            : "images/{$folder}/{$n}.jpg?v={$mtime}";
 
         // Placeholder hanya di-inline jika benar-benar kecil, agar HTML tidak membengkak
         $blurUri = (is_file($blur) && filesize($blur) <= self::BLUR_MAX_BYTES)
